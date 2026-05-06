@@ -15,8 +15,6 @@ build/
 backend/db.sqlite3
 backend/staticfiles/
 backend/media/
-backend/ml/*.joblib
-backend/ml/Crop_recommendation.csv
 
 # Node / React
 frontend/node_modules/

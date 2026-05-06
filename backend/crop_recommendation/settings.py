@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 from datetime import timedelta
 from dotenv import load_dotenv
+import dj_database_url
 
 load_dotenv()
 
@@ -65,9 +66,11 @@ TEMPLATES = [
 WSGI_APPLICATION = "crop_recommendation.wsgi.application"
 
 # ── Database ────────────────────────────────────────────────────────────────
-# Default: SQLite (zero-config dev). For PostgreSQL set DB_ENGINE in .env
 DATABASES = {
-    "default": {
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600
+    ) if os.getenv("DATABASE_URL") else {
         "ENGINE": os.getenv("DB_ENGINE", "django.db.backends.sqlite3"),
         "NAME": os.getenv("DB_NAME", str(BASE_DIR / "db.sqlite3")),
         "USER": os.getenv("DB_USER", ""),
