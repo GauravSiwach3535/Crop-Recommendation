@@ -10,6 +10,10 @@ python manage.py migrate --noinput
 echo "Collecting static files..."
 python manage.py collectstatic --noinput || true
 
+# Create superuser automatically if needed
+echo "Creating superuser if needed..."
+python manage.py create_superuser_auto || true
+
 if [ "$DEBUG" = "True" ] || [ "$DEBUG" = "true" ]; then
   echo "Starting development server..."
   python manage.py runserver 0.0.0.0:8000
